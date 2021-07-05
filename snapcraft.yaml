@@ -41,8 +41,6 @@ apps:
       - run-systemd-sessions    
     desktop: usr/share/applications/gnome-system-monitor.desktop
     common-id: gnome-system-monitor.desktop
-    environment:
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/lib/gnome-system-monitor
 
 parts:
   gnome-system-monitor:
