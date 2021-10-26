@@ -46,7 +46,7 @@ parts:
   gnome-system-monitor:
     source: https://gitlab.gnome.org/GNOME/gnome-system-monitor.git
     source-type: git
-    source-branch: gnome-40
+    source-branch: gnome-41
     plugin: meson
     meson-parameters:
       - --prefix=/snap/gnome-system-monitor/current/usr
