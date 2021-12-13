@@ -55,7 +55,7 @@ parts:
       snap/gnome-system-monitor/current/usr: usr
     override-pull: |
       snapcraftctl pull
-      snapcraftctl set-version $(git describe --tags --abbrev=10)
+      snapcraftctl set-version $(git describe --tags --abbrev=0)
       sed -i.bak -e 's|Icon=org.gnome.SystemMonitor$|Icon=${SNAP}/meta/gui/org.gnome.SystemMonitor.svg|g' gnome-system-monitor.desktop.in.in
       sed -i.bak -E -e 's|^(NotShowIn=.*)$|# \1|g' gnome-system-monitor.desktop.in.in
     override-build: |
