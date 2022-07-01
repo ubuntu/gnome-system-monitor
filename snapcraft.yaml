@@ -12,7 +12,7 @@ description: |
 
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
-base: core20
+base: core22
 
 plugs:
   run-systemd-sessions:
@@ -29,7 +29,7 @@ slots:
 
 apps:
   gnome-system-monitor:
-    extensions: [ gnome-3-38 ]
+    extensions: [ gnome ]
     command: usr/bin/gnome-system-monitor
     plugs:
       - unity7
@@ -38,15 +38,26 @@ apps:
       - hardware-observe
       - system-observe
       - process-control
-      - run-systemd-sessions    
+      - run-systemd-sessions
     desktop: usr/share/applications/gnome-system-monitor.desktop
     common-id: gnome-system-monitor.desktop
 
 parts:
+  meson-deps:
+    plugin: nil
+    source: https://github.com/mesonbuild/meson.git
+    source-branch: '0.62'
+    override-build: |
+      pip install .
+    build-packages:
+      - python3-pip
+      - ninja-build
+
   gnome-system-monitor:
     source: https://gitlab.gnome.org/GNOME/gnome-system-monitor.git
     source-type: git
-    source-branch: gnome-41
+    source-tag: "42.0"
+    after: [ meson-deps]
     plugin: meson
     meson-parameters:
       - --prefix=/snap/gnome-system-monitor/current/usr
@@ -89,10 +100,10 @@ parts:
   cleanup:
     after: [libraries]
     plugin: nil
-    build-snaps: [core20, gnome-3-38-2004]
+    build-snaps: [core22, gnome-42-2204]
     override-prime: |
       set -eux
-      for snap in "core20" "gnome-3-38-2004"; do
+      for snap in "core22" "gnome-42-2204"; do
         cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
       done
 
