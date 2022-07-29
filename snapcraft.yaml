@@ -48,6 +48,7 @@ parts:
     source-type: git
     source-tag: '42.0'
     plugin: meson
+    parse-info: [usr/share/metainfo/gnome-system-monitor.appdata.xml]
     meson-parameters:
       - --prefix=/snap/gnome-system-monitor/current/usr
       - --buildtype=release
