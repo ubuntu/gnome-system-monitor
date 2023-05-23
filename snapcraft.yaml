@@ -14,6 +14,9 @@ grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
 base: core22
 
+build-snaps:
+  - gnome-42-2204/latest/candidate
+
 plugs:
   run-systemd-sessions:
     interface: system-files
@@ -44,9 +47,11 @@ apps:
 
 parts:
   gnome-system-monitor:
+# ext:updatesnap
     source: https://gitlab.gnome.org/GNOME/gnome-system-monitor.git
     source-type: git
     source-tag: '42.0'
+    source-depth: 1
     plugin: meson
     parse-info: [usr/share/metainfo/gnome-system-monitor.appdata.xml]
     meson-parameters:
