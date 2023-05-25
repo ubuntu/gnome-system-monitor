@@ -50,7 +50,7 @@ parts:
 # ext:updatesnap
     source: https://gitlab.gnome.org/GNOME/gnome-system-monitor.git
     source-type: git
-    source-tag: '42.0'
+    source-tag: '44.0'
     source-depth: 1
     plugin: meson
     parse-info: [usr/share/metainfo/gnome-system-monitor.appdata.xml]
@@ -102,4 +102,3 @@ parts:
       for snap in "core22" "gnome-42-2204"; do
         cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$CRAFT_PRIME/{}" \;
       done
-
