@@ -12,10 +12,10 @@ description: |
 
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
-base: core22
+base: core24
 
 build-snaps:
-  - gnome-42-2204/latest/candidate
+  - gnome-46-2404/latest/candidate
 
 plugs:
   run-systemd-sessions:
@@ -42,8 +42,8 @@ apps:
       - system-observe
       - process-control
       - run-systemd-sessions
-    desktop: usr/share/applications/gnome-system-monitor.desktop
-    common-id: gnome-system-monitor.desktop
+    desktop: usr/share/applications/org.gnome.SystemMonitor.desktop
+    common-id: org.gnome.SystemMonitor.desktop
 
 parts:
   gnome-system-monitor:
@@ -63,12 +63,12 @@ parts:
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=10)
-      sed -i.bak -e 's|Icon=org.gnome.SystemMonitor$|Icon=${SNAP}/meta/gui/org.gnome.SystemMonitor.svg|g' gnome-system-monitor.desktop.in
-      sed -i.bak -E -e 's|^(NotShowIn=.*)$|# \1|g' gnome-system-monitor.desktop.in
+      sed -i.bak -e 's|Icon=@APP_ID@$|Icon=${SNAP}/meta/gui/org.gnome.SystemMonitor.svg|g'  ./data/org.gnome.SystemMonitor.desktop.in.in
+      sed -i.bak -E -e 's|^(NotShowIn=.*)$|# \1|g' ./data/org.gnome.SystemMonitor.desktop.in.in
     override-build: |
       craftctl default
       mkdir -p $CRAFT_PART_INSTALL/meta/gui/
-      cp $CRAFT_PART_BUILD/gnome-system-monitor.desktop $CRAFT_PART_INSTALL/meta/gui/
+      cp $CRAFT_PART_BUILD/data/org.gnome.SystemMonitor.desktop $CRAFT_PART_INSTALL/meta/gui/
       cp $CRAFT_PART_SRC/data/icons/public/hicolor/scalable/apps/org.gnome.SystemMonitor.svg $CRAFT_PART_INSTALL/meta/gui/
     build-packages:
       - desktop-file-utils
@@ -80,6 +80,8 @@ parts:
       - yelp-tools
     stage-packages:
       - libsigc++-2.0-0v5
+    build-snaps:
+      - gnome-46-2404-sdk/latest/candidate
 
   # workaround snapcraft trying to outsmart us by copying ldd listed libraries
   libraries:
@@ -96,9 +98,9 @@ parts:
   cleanup:
     after: [libraries]
     plugin: nil
-    build-snaps: [core22, gnome-42-2204]
+    build-snaps: [core24, gnome-46-2404]
     override-prime: |
       set -eux
-      for snap in "core22" "gnome-42-2204"; do
+      for snap in "core24" "gnome-46-2404"; do
         cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$CRAFT_PRIME/{}" \;
       done
