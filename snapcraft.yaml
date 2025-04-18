@@ -71,13 +71,12 @@ parts:
       cp $CRAFT_PART_BUILD/data/org.gnome.SystemMonitor.desktop $CRAFT_PART_INSTALL/meta/gui/
       cp $CRAFT_PART_SRC/data/icons/public/hicolor/scalable/apps/org.gnome.SystemMonitor.svg $CRAFT_PART_INSTALL/meta/gui/
     build-packages:
-      - desktop-file-utils
       - docbook-to-man
+      - libcatch2-dev
       - libgtop2-dev
       - libsigc++-2.0-dev
       - libsystemd-dev
       - policykit-1
-      - yelp-tools
     stage-packages:
       - libsigc++-2.0-0v5
     build-snaps:
