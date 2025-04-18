@@ -53,7 +53,7 @@ parts:
     source-tag: '48.1'
     source-depth: 1
     plugin: meson
-    parse-info: [usr/share/metainfo/gnome-system-monitor.appdata.xml]
+    parse-info: [usr/share/metainfo/gnome-system-monitor.metainfo.xml]
     meson-parameters:
       - --prefix=/snap/gnome-system-monitor/current/usr
       - --buildtype=release
